@@ -1,0 +1,10 @@
+version: '2'
+services:
+  appserver:
+    build: ./go/
+    ports:
+      - 5000:5000
+  webserver:
+    build: ./nginx/
+    ports:
+      - 8080:80
