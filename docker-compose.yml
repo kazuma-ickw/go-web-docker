@@ -4,7 +4,11 @@ services:
     build: ./go/
     ports:
       - 5000:5000
+    volumes:
+      - ${APPDIR}:/projects/
   webserver:
     build: ./nginx/
     ports:
       - 8080:80
+    links:
+      - appserver:app-server
