@@ -6,9 +6,18 @@ services:
       - 5000:5000
     volumes:
       - ${APPDIR}:/projects/
+    links:
+      - mysql
   webserver:
     build: ./nginx/
     ports:
       - 8080:80
     links:
       - appserver:app-server
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./mysql/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app
