@@ -1,7 +1,7 @@
 FROM centos:7
 EXPOSE 5000
 
-RUN yum -y install git
+RUN yum -y install git vim-enhanced
 RUN curl -LO https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
 RUN tar -C /usr/local -xvzf go1.7.4.linux-amd64.tar.gz
 
