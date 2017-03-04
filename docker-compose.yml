@@ -1,5 +1,20 @@
 version: '2'
 services:
+  webserver:
+    build: ./nginx/
+    ports:
+      - 8080:80
+    depends_on:
+      - appserver
+    links:
+      - appserver
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./mysql/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app
   appserver:
     build: ./go/
     ports:
@@ -8,16 +23,3 @@ services:
       - ${APPDIR}:/projects/
     links:
       - mysql
-  webserver:
-    build: ./nginx/
-    ports:
-      - 8080:80
-    links:
-      - appserver:app-server
-  mysql:
-    image: mysql:5.7
-    volumes:
-      - ./mysql/mysql_data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=app
