@@ -16,7 +16,10 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=app
   appserver:
-    build: ./go/
+    build:
+      context: ./go/
+      args:
+        goversion: ${GO_VERSION}
     ports:
       - 5000:5000
     volumes:
